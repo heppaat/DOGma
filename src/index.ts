@@ -36,7 +36,7 @@ const convertBreeds = (data: Data) => {
   console.log(result);
 };
 
-const capitalize = (str: string) => {
+/* const capitalize = (str: string) => {
   const swap = (char: string) => {
     let abc = "abcdefghijklmnopqrstuvwxyz";
     let ABC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -83,7 +83,21 @@ const capitalize = (str: string) => {
     }
   }
   return result;
+}; */
+
+const capitalizeModern = (str: string) => {
+  return str
+    .split(" ")
+    .map((e) => e[0].toUpperCase() + e.slice(1))
+    .join(" ")
+    .trim();
 };
+
+/* const capitalizeModern = (str: string) => {
+  const words = str.split(" ");
+  const capitalizedWords = words.map((e) => e[0].toUpperCase() + e.slice(1));
+  return capitalizedWords.join("*");
+}; */
 
 type Result = { id: number; name: string; sub: boolean | string };
 const extendedConvertBreeds = (data: Data) => {
@@ -98,15 +112,15 @@ const extendedConvertBreeds = (data: Data) => {
           ...result,
           {
             id: counter++,
-            name: capitalize(`${subBreedName} ${breed}`),
-            sub: capitalize(breed),
+            name: capitalizeModern(`${subBreedName} ${breed}`),
+            sub: capitalizeModern(breed),
           },
         ];
       }
     } else {
       result = [
         ...result,
-        { id: counter++, name: `${capitalize(breed)}`, sub: false },
+        { id: counter++, name: capitalizeModern(`${breed}`), sub: false },
       ];
     }
   }
